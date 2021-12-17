@@ -1,3 +1,4 @@
+-- Tabla Usuarios
 USE [MarketChain]
 GO
 
@@ -13,6 +14,7 @@ CREATE TABLE [dbo].[Usuarios] (
     [Apellido] [nvarchar](150) NOT NULL,
     [Email] [nvarchar](150) NOT NULL,
     [EsVendedor] [bit] NOT NULL,
+    [Fondos] [decimal] NOT NULL,
  CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -20,5 +22,13 @@ CREATE TABLE [dbo].[Usuarios] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO Usuarios([Nombre],[Apellido],[Email],[EsVendedor]) 
-VALUES ('Carlos','Nuila','cnuila14@icloud.com',0);
+-- Datos Prueba
+INSERT INTO Usuarios([Nombre],[Apellido],[Email],[EsVendedor],[Fondos]) 
+VALUES ('Carlos','Nuila','cnuila14@icloud.com',0,100000),
+        ('Daniel','Agurcia','cnuila20@icloud.com',0,100000);
+
+SELECT v.Id, v.UserIdComprador, v.ProductId, v.Fecha
+FROM Ventas as v INNER JOIN Productos as p ON v.ProductId = p.Id
+WHERE p.UserId = 1
+
+SELECT Fondos FROM Usuarios WHERE Id = 1
