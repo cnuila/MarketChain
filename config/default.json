@@ -1,0 +1,11 @@
+{
+    "connection":{
+        "server": "tcp:smarketchain.database.windows.net",
+        "userName" : "admindev",
+        "password" : "Password#123",
+        "options": {
+            "encrypt" : true,
+            "database":"Marketchain"
+        }
+    }
+}
