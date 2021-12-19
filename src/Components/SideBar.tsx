@@ -1,47 +1,71 @@
 import React from 'react'
 
-export default function SideBar() {
+interface Props {
+    cambiarVista: (nombreVista: string) => void;
+    vista: string;
+}
+
+interface OpcionesNav {
+    nombre: string;
+    icono: string;
+}
+
+const SideBar: React.FC<Props> = ({ cambiarVista, vista }) => {
+
+    const opcionesNav: Array<OpcionesNav> = [{ nombre: "Market", icono: "shop" },
+    { nombre: "Productos", icono: "inboxes-fill" },
+    { nombre: "Compras", icono: "bag-check-fill" },
+    { nombre: "Ventas", icono: "cash-coin" }];
+
     return (
-        <div className=''>
-            <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
-                <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span className="fs-4">MarketChain</span>
-                </a>
-            
-                <ul className="nav nav-pills flex-column mb-auto">
-                    <li className="nav-item">
-                        <a href="#" className="nav-link active" aria-current="page">
-                            <svg className="bi me-2" width="16" height="16"></svg>
-                            Market
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <svg className="bi me-2" width="16" height="16"></svg>
-                            Mis Compras
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <svg className="bi me-2" width="16" height="16"></svg>
-                            Mis Productos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <svg className="bi me-2" width="16" height="16"></svg>
-                            Mis Ventas
-                        </a>
-                    </li>
+        <div className="d-flex flex-column p-3 text-white bg-dark vh-100">
+
+            <div className="mb-3 px-2">
+                <p className="fs-4">MarketChain</p>
+            </div>
+
+            <div className=''>
+                <ul className="nav nav-pills flex-column">
+                    {
+                        opcionesNav.map(opcion => {
+                            let label = "";
+                            if (opcion.nombre !== "Market") {
+                                label = "Mis " + opcion.nombre;
+                            } else {
+                                label = opcion.nombre;
+                            }
+
+                            if (vista === opcion.nombre) {
+                                return (
+                                    <li className="nav-item">
+                                        <div className="nav-link active" onClick={() => cambiarVista(opcion.nombre)}>
+                                            <i className={`bi bi-${opcion.icono} pe-2`} style={{ fontSize: 18 }}/>
+                                            <span className="ps-2 pe-none">{label}</span>
+                                        </div>
+                                    </li>
+                                );
+                            } else {
+                                return (
+                                    <li>
+                                        <div className="nav-link text-white" onClick={() => cambiarVista(opcion.nombre)}>
+                                            <i className={`bi bi-${opcion.icono} pe-2`} style={{ fontSize: 18 }}/>
+                                            <span className="ps-2 pe-none">{label}</span>
+                                        </div>
+                                    </li>
+                                );
+                            }
+                        })
+                    }
                 </ul>
-                <div className='ms-auto'>
-                    <a className="d-flex align-items-center text-white text-decoration-none">
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2"/>
-                        <strong>mdo</strong>
-                    </a>
-                </div>
+            </div>
+
+            <div className='mt-auto'>
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2" />
+                <strong>Nombre Usuario</strong>
             </div>
 
         </div>
     )
 }
+
+export default SideBar;
