@@ -27,7 +27,7 @@ const SideBar: React.FC<Props> = ({ cambiarVista, vista }) => {
             <div className=''>
                 <ul className="nav nav-pills flex-column">
                     {
-                        opcionesNav.map(opcion => {
+                        opcionesNav.map((opcion,index) => {
                             let label = "";
                             if (opcion.nombre !== "Market") {
                                 label = "Mis " + opcion.nombre;
@@ -37,7 +37,7 @@ const SideBar: React.FC<Props> = ({ cambiarVista, vista }) => {
 
                             if (vista === opcion.nombre) {
                                 return (
-                                    <li className="nav-item">
+                                    <li key={index} className="nav-item">
                                         <div className="nav-link active" onClick={() => cambiarVista(opcion.nombre)}>
                                             <i className={`bi bi-${opcion.icono} pe-2`} style={{ fontSize: 18 }}/>
                                             <span className="ps-2 pe-none">{label}</span>
@@ -46,7 +46,7 @@ const SideBar: React.FC<Props> = ({ cambiarVista, vista }) => {
                                 );
                             } else {
                                 return (
-                                    <li>
+                                    <li key={index} className='nav-item'>
                                         <div className="nav-link text-white" onClick={() => cambiarVista(opcion.nombre)}>
                                             <i className={`bi bi-${opcion.icono} pe-2`} style={{ fontSize: 18 }}/>
                                             <span className="ps-2 pe-none">{label}</span>

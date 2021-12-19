@@ -1,8 +1,20 @@
 var router = require('express').Router();
 var productOperations = require('../Operaciones DB/OperacionesProductos');
 
-router.get('/',function (request, response) {
-    productOperations.getProductos().then((data) => {
+router.get('/MisProductos/:userId',function (request, response) {
+    const { userId } = request.params;
+
+    productOperations.getProductosByUser(userId).then((data) => {
+        response.json(data[0]);
+    }).catch((error) => {
+        response.status(400).json({ msg: "Bad Request. " + error })
+    });
+});
+
+router.get('/Market/:userId',function (request, response) {
+    const { userId } = request.params;
+
+    productOperations.getProductosMarket(userId).then((data) => {
         response.json(data[0]);
     }).catch((error) => {
         response.status(400).json({ msg: "Bad Request. " + error })
@@ -10,7 +22,7 @@ router.get('/',function (request, response) {
 });
 
 router.post('/',function (request, response){
-    let nuevoProducto = { ...request.body };
+    const nuevoProducto = { ...request.body };
     
     productOperations.addProducto(nuevoProducto).then(data => {
         response.status(201).json(data);

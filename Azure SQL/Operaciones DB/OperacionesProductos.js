@@ -1,10 +1,12 @@
 var config = require('../config');
 const sql = require('mssql');
 
-async function getProductos(){
+async function getProductosByUser(userId){
     try {
         let db = await sql.connect(config);
-        let productos = await db.request().query("SELECT * FROM Productos");
+        let productos = await db.request()
+                .input("UserId",sql.Int,userId)
+                .query("SELECT * FROM Productos WHERE UserId = @UserId");
         return productos.recordsets;
     }
     catch(error){
@@ -71,10 +73,26 @@ async function updateProducto(producto){
     }
 }
 
+async function getProductosMarket(userId){
+    try{
+        let db = await sql.connect(config);
+        let productosMarket = await db.request()
+                .input('UserId', sql.Int, userId)
+                .query("SELECT p.Id, p.Nombre as NombreProducto, p.Descripcion, p.Precio, u.Nombre as NombreUsuario, u.Apellido " +
+                        "FROM Productos as p INNER JOIN Usuarios as u ON p.UserId = u.Id " +
+                        "WHERE p.Disponible = 1 AND p.UserId != @UserId");
+        return productosMarket.recordsets;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
-    getProductos,
+    getProductosByUser,
     getProducto,
     addProducto,
     removeProducto,
-    updateProducto
+    updateProducto,
+    getProductosMarket
 }
