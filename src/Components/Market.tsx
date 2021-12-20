@@ -89,7 +89,7 @@ const Market: React.FC = () => {
 
                                                     <div className='card bg-primary'>
                                                         <div className='card-body'>
-                                                            <h4 className='card-title text-light'>{producto.NombreProducto}</h4>
+                                                            <h4 className='card-title text-light text-wrap'>{producto.NombreProducto}</h4>
                                                             <h6 className='card-subtitle mb-2 text-dark'>L. {producto.Precio}</h6>
                                                             <h6 className='text-light'>{producto.NombreUsuario} {producto.Apellido}</h6>
                                                             <p className='card-text text-light'>{producto.Descripcion}</p>
