@@ -26,7 +26,7 @@ const Productos: React.FC = () => {
 
     const getProductos = async () => {
         //cambiar por el user Id del usuario
-        await axios.get('http://localhost:3001/api/Productos/MisProductos/1')
+        await axios.get('https://marketchain-api.azurewebsites.net/api/Productos/MisProductos/1')
             .then(response => {
                 setProductos(response.data);
             })
@@ -41,7 +41,7 @@ const Productos: React.FC = () => {
     const agregarProducto = async () => {
         //cambiar por el user actual
         productoActual.UserId = "1";
-        let url = `http://localhost:3001/api/Productos`
+        let url = `https://marketchain-api.azurewebsites.net/api/Productos`
             await axios.post(url, productoActual)
                 .then(response => {
                     console.log("Creado");
@@ -55,7 +55,7 @@ const Productos: React.FC = () => {
 
     const editarProducto = async () => {
         let id = productoActual?.Id;
-            let url = `http://localhost:3001/api/Productos/${id}`
+            let url = `https://marketchain-api.azurewebsites.net/api/Productos/${id}`
             await axios.put(url, productoActual)
                 .then(response => {
                     console.log(response.data);
@@ -69,7 +69,7 @@ const Productos: React.FC = () => {
 
     const eliminarProducto = async () => {
         let id = productoActual?.Id;
-            await axios.delete(`http://localhost:3001/api/Productos/${id}`)
+            await axios.delete(`https://marketchain-api.azurewebsites.net/api/Productos/${id}`)
                 .then(response => {
                     console.log(response.data.msg);
                 })

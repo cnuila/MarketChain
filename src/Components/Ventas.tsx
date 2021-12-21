@@ -22,7 +22,7 @@ const Ventas: React.FC = () => {
 
     const getVentas = async () => {
         //cambiar por el user Id del usuario
-        await axios.get('http://localhost:3001/api/Ventas/Usuario/1')
+        await axios.get('https://marketchain-api.azurewebsites.net/api/Ventas/Usuario/1')
             .then(response => {
                 setVentas(response.data);
             })

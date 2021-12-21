@@ -34,7 +34,7 @@ const Market: React.FC = () => {
 
     const getProductosMarket = async () => {
         //cambiar por el user Id del usuario
-        await axios.get('http://localhost:3001/api/Productos/Market/2')
+        await axios.get('https://marketchain-api.azurewebsites.net/api/Productos/Market/2')
             .then(response => {
                 setProductos(response.data);
             })
@@ -47,7 +47,7 @@ const Market: React.FC = () => {
     }
 
     const comprar = async () => {
-        const url = 'http://localhost:3001/api/Ventas';
+        const url = 'https://marketchain-api.azurewebsites.net/api/Ventas';
 
         //reemplazar con user Id
         const nuevaVenta = {

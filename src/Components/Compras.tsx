@@ -22,7 +22,7 @@ const Compras: React.FC = () => {
 
     const getCompras = async () => {
         //cambiar por el user Id del usuario
-        await axios.get('http://localhost:3001/api/Ventas/MisCompras/2')
+        await axios.get('https://marketchain-api.azurewebsites.net/api/Ventas/MisCompras/2')
             .then(response => {
                 setCompras(response.data);
             })
